@@ -115,19 +115,27 @@ export default function AppointmentsPage() {
                             {apt.doctor?.specialty}
                           </span>
                        </div>
-                       <h3 className="text-2xl font-black text-slate-900 leading-tight">
-                         {apt.doctor?.full_name || "Doctor"}
-                       </h3>
-                       <div className="flex flex-wrap gap-4 pt-2">
-                          <div className="flex items-center gap-2 text-sm text-slate-500">
-                            <Calendar className="w-4 h-4 text-primary" />
-                            {format(new Date(apt.appointment_date), "PPP")}
-                          </div>
-                          <div className="flex items-center gap-2 text-sm text-slate-500">
-                            <Clock className="w-4 h-4 text-primary" />
-                            {apt.appointment_time}
-                          </div>
-                       </div>
+                        <h3 className="text-2xl font-black text-slate-900 leading-tight">
+                          {apt.doctor?.full_name || "Medical Professional"}
+                        </h3>
+                        <div className="flex flex-wrap gap-4 pt-2">
+                           <div className="flex items-center gap-2 text-sm text-slate-500">
+                             <Calendar className="w-4 h-4 text-primary" />
+                             {apt.appointment_date ? (
+                               (() => {
+                                 try {
+                                   return format(new Date(apt.appointment_date), "PPP");
+                                 } catch (e) {
+                                   return "Invalid Date";
+                                 }
+                               })()
+                             ) : "Date TBD"}
+                           </div>
+                           <div className="flex items-center gap-2 text-sm text-slate-500">
+                             <Clock className="w-4 h-4 text-primary" />
+                             {apt.appointment_time || "Time TBD"}
+                           </div>
+                        </div>
                     </div>
                   </div>
 
